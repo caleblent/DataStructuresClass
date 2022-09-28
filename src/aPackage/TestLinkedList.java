@@ -128,125 +128,125 @@ class TestLinkedList {
 		assertFalse(list.contains(5));
 	}
 
-//	@Test
-//	void testDeleteFirst() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.delete(42);
-//		assertEquals("1 2 3 4 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteLast() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.delete(4);
-//		assertEquals("42 1 2 3 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteMiddle() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.delete(2);
-//		assertEquals("42 1 3 4 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteEmpty() {
-//		assertEquals("", list.toString());
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			list.delete(1);
-//		});
-//	}
-//
-//	@Test
-//	void testDeleteMissing() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			list.delete(1);
-//		});
-//	}
-//	
-//	@Test
-//	void testDeleteFirstByIndex() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.deleteIndex(0);
-//		assertEquals("1 2 3 4 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteLastByIndex() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.deleteIndex(4);
-//		assertEquals("42 1 2 3 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteMiddleByIndex() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		list.deleteIndex(2);
-//		assertEquals("42 1 3 4 ", list.toString());
-//	}
-//
-//	@Test
-//	void testDeleteEmptyByIndex() {
-//		assertEquals("", list.toString());
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			list.deleteIndex(0);
-//		});
-//	}
-//	
-//	@Test
-//	void testDeleteIllegalIndex() {
-//		assertEquals("", list.toString());
-//		list.insert(42, 0);
-//		list.insert(1, 1);
-//		list.insert(2, 2);
-//		list.insert(3, 3);
-//		list.insert(4, 4);
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			list.deleteIndex(-1);
-//		});
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			list.deleteIndex(5);
-//		});
-//		assertEquals("42 1 2 3 4 ", list.toString());
-//	}
+	@Test
+	void testDeleteFirst() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.delete(42);
+		assertEquals("1 2 3 4 ", list.toString());
+	}
+
+	@Test
+	void testDeleteLast() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.delete(4);
+		assertEquals("42 1 2 3 ", list.toString());
+	}
+
+	@Test
+	void testDeleteMiddle() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.delete(2);
+		assertEquals("42 1 3 4 ", list.toString());
+	}
+
+	@Test
+	void testDeleteEmpty() {
+		assertEquals("", list.toString());
+		assertThrows(IllegalArgumentException.class, () -> {
+			list.delete(1);
+		});
+	}
+
+	@Test
+	void testDeleteMissing() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		assertThrows(IllegalArgumentException.class, () -> {
+			list.delete(1);
+		});
+	}
+	
+	@Test
+	void testDeleteFirstByIndex() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.deleteIndex(0);
+		assertEquals("1 2 3 4 ", list.toString());
+	}
+
+	@Test
+	void testDeleteLastByIndex() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.deleteIndex(4);
+		assertEquals("42 1 2 3 ", list.toString());
+	}
+
+	@Test
+	void testDeleteMiddleByIndex() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		list.deleteIndex(2);
+		assertEquals("42 1 3 4 ", list.toString());
+	}
+
+	@Test
+	void testDeleteEmptyByIndex() {
+		assertEquals("", list.toString());
+		assertThrows(IllegalArgumentException.class, () -> {
+			list.deleteIndex(0);
+		});
+	}
+	
+	@Test
+	void testDeleteIllegalIndex() {
+		assertEquals("", list.toString());
+		list.insert(42, 0);
+		list.insert(1, 1);
+		list.insert(2, 2);
+		list.insert(3, 3);
+		list.insert(4, 4);
+		assertEquals("42 1 2 3 4 ", list.toString());
+		assertThrows(IllegalArgumentException.class, () -> {
+			list.deleteIndex(-1);
+		});
+		assertThrows(IllegalArgumentException.class, () -> {
+			list.deleteIndex(5);
+		});
+		assertEquals("42 1 2 3 4 ", list.toString());
+	}
 
 }

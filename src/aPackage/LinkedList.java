@@ -69,6 +69,8 @@ public class LinkedList<T> {
 	}
 	
 	public void delete(T value) throws IllegalArgumentException {
+		if (nodeCount == 0)
+			throw new IllegalArgumentException("There are no values to delete.");
 		ListNode curr = head;
 		while (curr.next.data != value) {
 			curr = curr.next;
@@ -80,6 +82,10 @@ public class LinkedList<T> {
 	}
 	
 	public void deleteIndex(int index) throws IllegalArgumentException {
+		if (nodeCount == 0)
+			throw new IllegalArgumentException("There are no values to delete.");
+		if (index < 0 || index > nodeCount)
+			throw new IllegalArgumentException(index + " is not a valid index.");
 		ListNode curr = head;
 		for (int i = 0; i < index; i++) {
 			curr = curr.next;
@@ -126,14 +132,12 @@ public class LinkedList<T> {
 	 * @return true if data item is already in the list, false if not
 	 */
 	public boolean contains(T target) {
-		if (nodeCount == 0) {
+		if (nodeCount == 0)
 			return false;
-		}
 		ListNode ptr = head.next;
 		while(ptr != null && ptr.data != null) {
-			if(ptr.data.equals(target)) {
+			if(ptr.data.equals(target))
 				return true;
-			}
 			ptr = ptr.next;
 		}
 		return false;
@@ -143,14 +147,12 @@ public class LinkedList<T> {
 	public String toString() {
 		String retVal = "";
 		
-		if (head == null) {
+		if (head == null)
 			return "";
-		}
 		
 		ListNode ptr = head.next;
-		if (ptr == null) {
+		if (ptr == null)
 			return "";
-		}
 		
 		while( ptr != null) {
 			retVal += ptr.data + " ";
@@ -161,23 +163,6 @@ public class LinkedList<T> {
 		}
 		
 		return retVal;
-//		String retVal = "";
-//		if (nodeCount != 0) {
-//			ListNode ptr = head;
-//			
-//			if (ptr.next == tail) {
-//				return "Empty";
-//			}
-//			
-//			while( ptr != null) {
-//				retVal += ptr.data;
-//				if (ptr.next != null) {
-//					retVal += " -> ";
-//				}
-//				ptr = ptr.next;
-//			}
-//		}
-//		return retVal;
 	}
 	
 	public int getNodeCount() {
