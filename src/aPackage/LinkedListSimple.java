@@ -1,9 +1,13 @@
 package aPackage;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /** 
  * A simple LinkedList implementation
  * We will move on to a better version of this soon
  * @author gosnat
+ * @author Caleb Lent
  * @version Fall 2020
  *
  * @param <T> the type of data we are storing in this LinkedList
@@ -11,10 +15,13 @@ package aPackage;
 public class LinkedListSimple<T> {
 	
 	/** The first node in the list */
-	private ListNode headPointer;
+	protected ListNode head;
+	
+	/** The last node in the list */
+	protected ListNode tail;
 
 	/** The number of items in the list */
-	private int nodeCount;
+	protected int nodeCount;
 
 	/** 
 	 * Don't pay too much attention to this constructor since we're going to
@@ -23,12 +30,14 @@ public class LinkedListSimple<T> {
 	 * @param items
 	 */
 	public LinkedListSimple(T[] items) {
+		if (items == null)
+			throw new NullPointerException("'items' is null");
 		int size = items.length;
 		ListNode temp = null;
 		for(int i = size-1; i > 0; i--) {
 			temp = new ListNode(items[i], temp);
 		}
-		headPointer = new ListNode(items[0], temp);
+		head = new ListNode(items[0], temp);
 		nodeCount = size;
 	}
 	
@@ -41,7 +50,7 @@ public class LinkedListSimple<T> {
 	 * @throws IllegalArgumentException If requested index is out of bounds
 	 */
 	private ListNode findNodeAtPosition(int index) throws IllegalArgumentException{
-		ListNode ptr = headPointer;
+		ListNode ptr = head;
 		if(index >= nodeCount) {
 			throw new IllegalArgumentException("Not valid; largest index is " + (nodeCount-1));
 		}
@@ -67,7 +76,7 @@ public class LinkedListSimple<T> {
 	 * @return true if data item is already in the list, false if not
 	 */
 	public boolean contains(T target) {
-		ListNode ptr = headPointer;
+		ListNode ptr = head;
 		while(ptr != null) {
 			if( ptr.data.equals(target)) {
 				return true;
@@ -80,7 +89,7 @@ public class LinkedListSimple<T> {
 	@Override
 	public String toString() {
 		String retVal = "";
-		ListNode ptr = headPointer;
+		ListNode ptr = head;
 		
 		if (ptr == null) {
 			return "Empty";
@@ -108,7 +117,7 @@ public class LinkedListSimple<T> {
 	 * @author gosnat
 	 *
 	 */
-	private class ListNode {
+	public class ListNode {
 		/** The data to store in this node */
 		T data;
 		/** A pointer to the next node in the list */
@@ -124,6 +133,33 @@ public class LinkedListSimple<T> {
 			next = nextNode;
 		}
 
+	}
+	
+	public Iterator<T> iterator() {
+		return new LLIterator();
+	}
+	
+	private class LLIterator implements Iterator<T> {
+		private ListNode cur;
+		
+		public LLIterator() {
+			cur = head;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return cur.next != null;
+		}
+		
+		@Override
+		public T next() {
+			if (hasNext()) {
+				cur = cur.next;
+				return cur.data;
+			} else {
+				throw new NoSuchElementException("At the end of the list");
+			}
+		}
 	}
 	
 }
