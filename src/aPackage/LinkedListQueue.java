@@ -7,7 +7,7 @@ public class LinkedListQueue<T> extends LinkedListSimple<T> implements DSQueue<T
 	public LinkedListQueue() {
 		super(null);
 		head = new ListNode(null, null);
-		tail = new ListNode(null, head);
+		head = new ListNode(null, tail);
 		penultimate = head;
 	}
 	

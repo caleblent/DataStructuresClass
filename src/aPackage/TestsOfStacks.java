@@ -26,7 +26,7 @@ public class TestsOfStacks{
 	@BeforeAll
 	static void setUp() {
 		stacks = new Object[2];
-		stacks[0] = new ArrayStack<String>(10);
+		stacks[0] = new LinkedListStack<String>();
 		stacks[1] = new LinkedListStack<String>();
 	}
 	
