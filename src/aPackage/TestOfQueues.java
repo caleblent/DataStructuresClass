@@ -26,7 +26,7 @@ public class TestOfQueues{
 	@BeforeAll
 	static void setUp() {
 		queues = new Object[2];
-		queues[0] = new LinkedListQueue<String>();
+		queues[0] = new ArrayQueue<String>(10);
 		queues[1] = new LinkedListQueue<String>();
 	}
 	
