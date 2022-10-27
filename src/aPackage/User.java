@@ -4,6 +4,31 @@ public class User {
 	
 	public static void main(String[] args) {
 		
+		Trie trie = new Trie();
+		trie.insert("cat");
+		trie.insert("cats");
+		trie.insert("catnip");
+		trie.insert("catnap");
+		trie.insert("caterpillar");
+		trie.insert("45");
+		
+		System.out.println(trie.search("c"));
+		System.out.println(trie.search("ca"));
+		System.out.println(trie.startsWith("ca"));
+		System.out.println();
+		System.out.println(trie.search("cat"));
+		System.out.println(trie.search("cats"));
+		System.out.println(trie.search("catn"));
+		System.out.println();
+		System.out.println(trie.startsWith("catn"));
+		System.out.println(trie.startsWith("catm"));
+		System.out.println();
+		System.out.println(trie.startsWith("cater"));
+		System.out.println(trie.search("cater"));
+		
+	}
+	
+	public static void testArrayLengtheners() {
 		int[] nums = {1, 2, 3, 4, 5};
 		
 		int[] nums2 = doubleArray(nums);
@@ -14,9 +39,6 @@ public class User {
 		printInt(nums2);
 		printInt(nums3);
 		printInt(nums4);
-		
-		
-		
 	}
 	
 	public static void printInt(int[] arr) {
