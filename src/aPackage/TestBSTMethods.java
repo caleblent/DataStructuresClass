@@ -8,7 +8,7 @@ class TestBSTMethods {
 
 	@Test
 	void testInsertInOrder() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		assertEquals("", tree.printInOrder());
 		assertEquals("", tree.printPreOrder());
 		assertEquals("", tree.printPostOrder());
@@ -36,7 +36,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testInsertReverseOrder() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		assertEquals("", tree.printInOrder());
 		assertEquals("", tree.printPreOrder());
 		assertEquals("", tree.printPostOrder());
@@ -64,7 +64,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testInsertRandomOrder() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		assertEquals("", tree.printInOrder());
 		assertEquals("", tree.printPreOrder());
 		assertEquals("", tree.printPostOrder());
@@ -102,7 +102,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testInsertDuplicateData() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("D");
@@ -120,7 +120,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteNoChild() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("D");
@@ -139,7 +139,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteOneChildLeft() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("D");
@@ -158,7 +158,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteOneChildRight() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("D");
@@ -177,7 +177,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteTwoChildrenOneChildDonor() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("D");
@@ -196,7 +196,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteTwoChildrenNoChildDonor() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("E");
@@ -215,7 +215,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testDeleteMissing() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("E");
@@ -235,7 +235,7 @@ class TestBSTMethods {
 	
 	@Test
 	void testContains() {
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("C");
 		tree.insert("B");
 		tree.insert("E");

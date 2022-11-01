@@ -8,8 +8,11 @@ package aPackage;
  * trees.
  * 
  * @author Ignas Lelys
+ * @author Caleb Lent (modified it to BTNode<T> and etc specification)
  * @created Jun 29, 2011
  * 
+ * Original Github repo: https://github.com/ignl/BinarySearchTrees/blob/master/Trees/src/main/java/org/intelligentjava/algos/trees/AbstractBinarySearchTree.java
+ * New Github repo: https://github.com/caleblent/DataStructuresClass/blob/master/src/aPackage/BinarySearchTree.java
  */
 public class BinarySearchTree<T extends Comparable<T>> {
 
@@ -115,10 +118,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     /**
      * Insert new element to tree.
      * 
-     * @param element
-     *            Element to insert.
+     * @param data to insert
+     * 
+     * @throws IllegalArgumentException if data is a duplicate
      */
-    public BTNode<T> insert(T data) {
+    public BTNode<T> insert(T data) throws IllegalArgumentException {
         if (root == null) {
             root = new BTNode<T>(data, null, null, null);
             size++;
@@ -131,8 +135,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
             insertParentNode = searchTempNode;
             if (data.compareTo(searchTempNode.data) < 0) {
                 searchTempNode = searchTempNode.left;
-            } else {
+            } else if (data.compareTo(searchTempNode.data) > 0){
                 searchTempNode = searchTempNode.right;
+            } else {//(data.compareTo(searchTempNode.data) == 0)
+            	throw new IllegalArgumentException("Data to insert cannot be a duplicate.");
             }
         }
 
@@ -155,13 +161,15 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * 
      * @return New node that is in place of deleted node. Or null if element for
      *         delete was not found.
+     *         
+     * @throws IllegalArgumentException if data null or was not found
      */
-    public BTNode<T> delete(T element) {
+    public BTNode<T> delete(T element) throws IllegalArgumentException {
     	BTNode<T> deleteNode = search(element);
         if (deleteNode != null) {
             return delete(deleteNode);
         } else {
-            return null;
+            throw new IllegalArgumentException("Data was not found.");
         }
     }
 
@@ -173,10 +181,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * 
      * @return New node that is in place of deleted node. Or null if element for
      *         delete was not found.
-     *         
-     * @throws IllegalArgumentException if data null or was not found
+     * 
      */
-    protected BTNode<T> delete(BTNode<T> deleteNode) throws IllegalArgumentException {
+    protected BTNode<T> delete(BTNode<T> deleteNode) {
         if (deleteNode != null) {
         	BTNode<T> nodeToReturn = null;
             if (deleteNode != null) {
@@ -201,7 +208,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     
             return nodeToReturn;
         }
-        throw new IllegalArgumentException("Data was not found.");
+        return null;
     }
 
     /**
@@ -268,7 +275,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     public int getSize() {
         return size;
     }
-
+    
     /**
      * Tree traversal with printing element values. In order method.
      */
@@ -397,4 +404,62 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
+    
+    /*---------------TREE PRINTING METHODS FROM ORIGINAL SPECIFICATION-------------------*/
+    /**
+	 * Public facing interface for recursive pre-order traversal printing
+	 */
+	public String printInOrder() {
+		return printInOrder(root); // call the private recursive method
+	}
+
+	/**
+	 * Recursively print tree in In-Order traversal order
+	 * 
+	 * @param root root of this sub-tree
+	 */
+	private String printInOrder(BTNode<T> root) {
+		if (root == null) {
+			return "";
+		}
+		return printInOrder(root.left) + root.data.toString() + " " + printInOrder(root.right);
+	}
+
+	/**
+	 * Public facing interface for recursive post-order traversal printing
+	 */
+	public String printPostOrder() {
+		return printPostOrder(root); // call the private recursive method
+	}
+
+	/**
+	 * Recursively print tree in Post-Order traversal order
+	 * 
+	 * @param root root of this sub-tree
+	 */
+	private String printPostOrder(BTNode<T> root) {
+		if (root == null) {
+			return "";
+		}
+		return printPostOrder(root.left) + printPostOrder(root.right) + root.data + " ";
+	}
+
+	/**
+	 * Public facing interface for recursive pre-order traversal printing
+	 */
+	public String printPreOrder() {
+		return printPreOrder(root); // call the private recursive method
+	}
+
+	/**
+	 * Recursively print tree in Pre-Order traversal order
+	 * 
+	 * @param root root of this sub-tree
+	 */
+	private String printPreOrder(BTNode<T> root) {
+		if (root == null) {
+			return "";
+		}
+		return root.data + " " + printPreOrder(root.left) + printPreOrder(root.right);
+	}
 }
