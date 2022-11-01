@@ -4,6 +4,9 @@ public class User {
 
 	public static void main(String[] args) {
 
+	}
+	
+	public static void testBinarySearchTrees() {
 		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("A");
 		tree.insert("B");
@@ -44,36 +47,37 @@ public class User {
 		tree2.printTreePostOrder();
 		System.out.println();
 		tree2.delete("P");
+		tree2.delete("Y");
 		System.out.println();
 		tree2.printTreeInOrder();
 		System.out.println();
 		tree2.printTreePreOrder();
 		System.out.println();
 		tree2.printTreePostOrder();
-		
-		
-//		Trie trie = new Trie();
-//		trie.insert("cat");
-//		trie.insert("cats");
-//		trie.insert("catnip");
-//		trie.insert("catnap");
-//		trie.insert("caterpillar");
-//		trie.insert("45");
+	}
+	
+	public static void testTries() {
+		Trie trie = new Trie();
+		trie.insert("cat");
+		trie.insert("cats");
+		trie.insert("catnip");
+		trie.insert("catnap");
+		trie.insert("caterpillar");
+		trie.insert("45");
 
-//		System.out.println(trie.search("c"));
-//		System.out.println(trie.search("ca"));
-//		System.out.println(trie.startsWith("ca"));
-//		System.out.println(Math.pow(10, 2));
-//		System.out.println(trie.search("cat"));
-//		System.out.println(trie.search("cats"));
-//		System.out.println(trie.search("catn"));
-//		System.out.println();
-//		System.out.println(trie.startsWith("catn"));
-//		System.out.println(trie.startsWith("catm"));
-//		System.out.println();
-//		System.out.println(trie.startsWith("cater"));
-//		System.out.println(trie.search("cater"));
-
+		System.out.println(trie.search("c"));
+		System.out.println(trie.search("ca"));
+		System.out.println(trie.startsWith("ca"));
+		System.out.println(Math.pow(10, 2));
+		System.out.println(trie.search("cat"));
+		System.out.println(trie.search("cats"));
+		System.out.println(trie.search("catn"));
+		System.out.println();
+		System.out.println(trie.startsWith("catn"));
+		System.out.println(trie.startsWith("catm"));
+		System.out.println();
+		System.out.println(trie.startsWith("cater"));
+		System.out.println(trie.search("cater"));
 	}
 
 	public static void testArrayLengtheners() {
