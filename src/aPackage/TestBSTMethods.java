@@ -136,101 +136,101 @@ class TestBSTMethods {
 		assertEquals("C B D F E ", tree.printPreOrder());
 		assertEquals("B E F D C ", tree.printPostOrder());
 	}
-	
-	@Test
-	void testDeleteOneChildLeft() {
-		BST<String> tree = new BST<String>();
-		tree.insert("C");
-		tree.insert("B");
-		tree.insert("D");
-		tree.insert("F");
-		tree.insert("A");
-		tree.insert("E");
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A D F E ", tree.printPreOrder());
-		assertEquals("A B E F D C ", tree.printPostOrder());
-		
-		tree.delete("B");
-		assertEquals("A C D E F ", tree.printInOrder());
-		assertEquals("C A D F E ", tree.printPreOrder());
-		assertEquals("A E F D C ", tree.printPostOrder());
-	}
-	
-	@Test
-	void testDeleteOneChildRight() {
-		BST<String> tree = new BST<String>();
-		tree.insert("C");
-		tree.insert("B");
-		tree.insert("D");
-		tree.insert("F");
-		tree.insert("A");
-		tree.insert("E");
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A D F E ", tree.printPreOrder());
-		assertEquals("A B E F D C ", tree.printPostOrder());
-		
-		tree.delete("D");
-		assertEquals("A B C E F ", tree.printInOrder());
-		assertEquals("C B A F E ", tree.printPreOrder());
-		assertEquals("A B E F C ", tree.printPostOrder());
-	}
-	
-	@Test
-	void testDeleteTwoChildrenOneChildDonor() {
-		BST<String> tree = new BST<String>();
-		tree.insert("C");
-		tree.insert("B");
-		tree.insert("D");
-		tree.insert("F");
-		tree.insert("A");
-		tree.insert("E");
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A D F E ", tree.printPreOrder());
-		assertEquals("A B E F D C ", tree.printPostOrder());
-		
-		tree.delete("C");
-		assertEquals("A B D E F ", tree.printInOrder());
-		assertEquals("D B A F E ", tree.printPreOrder());
-		assertEquals("A B E F D ", tree.printPostOrder());
-	}
-	
-	@Test
-	void testDeleteTwoChildrenNoChildDonor() {
-		BST<String> tree = new BST<String>();
-		tree.insert("C");
-		tree.insert("B");
-		tree.insert("E");
-		tree.insert("F");
-		tree.insert("A");
-		tree.insert("D");
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A E D F ", tree.printPreOrder());
-		assertEquals("A B D F E C ", tree.printPostOrder());
-		
-		tree.delete("C");
-		assertEquals("A B D E F ", tree.printInOrder());
-		assertEquals("D B A E F ", tree.printPreOrder());
-		assertEquals("A B F E D ", tree.printPostOrder());
-	}
-	
-	@Test
-	void testDeleteMissing() {
-		BST<String> tree = new BST<String>();
-		tree.insert("C");
-		tree.insert("B");
-		tree.insert("E");
-		tree.insert("F");
-		tree.insert("A");
-		tree.insert("D");
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A E D F ", tree.printPreOrder());
-		assertEquals("A B D F E C ", tree.printPostOrder());
-		
-		assertThrows(IllegalArgumentException.class, ()->{tree.delete("G");});
-		assertEquals("A B C D E F ", tree.printInOrder());
-		assertEquals("C B A E D F ", tree.printPreOrder());
-		assertEquals("A B D F E C ", tree.printPostOrder());
-	}
+//	
+//	@Test
+//	void testDeleteOneChildLeft() {
+//		BST<String> tree = new BST<String>();
+//		tree.insert("C");
+//		tree.insert("B");
+//		tree.insert("D");
+//		tree.insert("F");
+//		tree.insert("A");
+//		tree.insert("E");
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A D F E ", tree.printPreOrder());
+//		assertEquals("A B E F D C ", tree.printPostOrder());
+//		
+//		tree.delete("B");
+//		assertEquals("A C D E F ", tree.printInOrder());
+//		assertEquals("C A D F E ", tree.printPreOrder());
+//		assertEquals("A E F D C ", tree.printPostOrder());
+//	}
+//	
+//	@Test
+//	void testDeleteOneChildRight() {
+//		BST<String> tree = new BST<String>();
+//		tree.insert("C");
+//		tree.insert("B");
+//		tree.insert("D");
+//		tree.insert("F");
+//		tree.insert("A");
+//		tree.insert("E");
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A D F E ", tree.printPreOrder());
+//		assertEquals("A B E F D C ", tree.printPostOrder());
+//		
+//		tree.delete("D");
+//		assertEquals("A B C E F ", tree.printInOrder());
+//		assertEquals("C B A F E ", tree.printPreOrder());
+//		assertEquals("A B E F C ", tree.printPostOrder());
+//	}
+//	
+//	@Test
+//	void testDeleteTwoChildrenOneChildDonor() {
+//		BST<String> tree = new BST<String>();
+//		tree.insert("C");
+//		tree.insert("B");
+//		tree.insert("D");
+//		tree.insert("F");
+//		tree.insert("A");
+//		tree.insert("E");
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A D F E ", tree.printPreOrder());
+//		assertEquals("A B E F D C ", tree.printPostOrder());
+//		
+//		tree.delete("C");
+//		assertEquals("A B D E F ", tree.printInOrder());
+//		assertEquals("D B A F E ", tree.printPreOrder());
+//		assertEquals("A B E F D ", tree.printPostOrder());
+//	}
+//	
+//	@Test
+//	void testDeleteTwoChildrenNoChildDonor() {
+//		BST<String> tree = new BST<String>();
+//		tree.insert("C");
+//		tree.insert("B");
+//		tree.insert("E");
+//		tree.insert("F");
+//		tree.insert("A");
+//		tree.insert("D");
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A E D F ", tree.printPreOrder());
+//		assertEquals("A B D F E C ", tree.printPostOrder());
+//		
+//		tree.delete("C");
+//		assertEquals("A B D E F ", tree.printInOrder());
+//		assertEquals("D B A E F ", tree.printPreOrder());
+//		assertEquals("A B F E D ", tree.printPostOrder());
+//	}
+//	
+//	@Test
+//	void testDeleteMissing() {
+//		BST<String> tree = new BST<String>();
+//		tree.insert("C");
+//		tree.insert("B");
+//		tree.insert("E");
+//		tree.insert("F");
+//		tree.insert("A");
+//		tree.insert("D");
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A E D F ", tree.printPreOrder());
+//		assertEquals("A B D F E C ", tree.printPostOrder());
+//		
+//		assertThrows(IllegalArgumentException.class, ()->{tree.delete("G");});
+//		assertEquals("A B C D E F ", tree.printInOrder());
+//		assertEquals("C B A E D F ", tree.printPreOrder());
+//		assertEquals("A B D F E C ", tree.printPostOrder());
+//	}
 
 	
 //	@Test

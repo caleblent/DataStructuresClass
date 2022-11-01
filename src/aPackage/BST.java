@@ -120,8 +120,9 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 		}
 
 		BTNode<T> curr = root;
+		int index = 0;
 		
-		while (curr != null) {
+		while (index < 50) {
 			int temp = curr.data.compareTo(data);
 
 			if (temp < 0) {
@@ -144,6 +145,8 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 
 			else if (temp == 0)
 				throw new IllegalArgumentException("Cannot insert duplicate data.");
+			
+			index++;
 		}
 	}
 
@@ -162,6 +165,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 		
 		while (curr != null) {
 			int temp = curr.data.compareTo(target);
+//			System.out.println(curr.data + " - " + target + " = " + temp);
 
 			if (temp < 0) {
 				if (curr.right != null)
@@ -170,20 +174,51 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 					throw new IllegalArgumentException("Data was not found.");
 			}
 
-			else if (temp < 0) {
+			else if (temp > 0) {
 				if (curr.left != null)
 					curr = curr.left;
-				else 
+				else
 					throw new IllegalArgumentException("Data was not found.");
 			}
 
 			else if (temp == 0) {
-				// find the min value
-				BTNode<T> min = findMin(root);
-				// set the root node data to the min value
-				root.data = min.data;
-				// delete the min node
-				min = null;
+				// 1. curr is a leaf node (no children)
+				if (curr.left == null && curr.right == null) {
+					System.out.println("NULL NULL NULL");
+					curr = null;
+					return;
+				}
+				
+				// 2. curr has a left node
+				else if (curr.right == null) {
+					curr.right = curr.left.right;
+					curr.data = curr.left.data;
+					curr.left = curr.left.left;
+					System.out.println(curr.left + " " + curr.data + " " + curr.right);
+					return;
+				}
+				
+				// 3. curr has a right node
+				else if (curr.left == null) {
+					curr.left = curr.right.left;
+					curr.data = curr.right.data;
+					curr.right = curr.right.right;
+					System.out.println(curr.left + " " + curr.data + " " + curr.right);
+					return;
+				}
+				
+				// 4. curr has both a left and right child node
+				else {
+					curr.data = findMin(curr).data;
+					BTNode<T> min = findMin(curr);
+					min = null; // WHY THE #$%@ DOES THIS NOT WORK????
+					OBJ_DESTROY(min);
+					return;
+//					BTNode<T> min = findMin(curr);
+//					curr.data = min.data;
+//					min = null; // WHY THE #$%@ DOES THIS NOT WORK????
+//					return;
+				}
 			}
 		}
 	}
@@ -197,12 +232,39 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 	 */
 	private BTNode<T> findMin(BTNode<T> subTreeRoot) {
 		if (subTreeRoot.right != null) {
-			return findLeftMostNode(subTreeRoot.right);
+			BTNode<T> curr = subTreeRoot.right;
+			
+			while (curr.left != null) {;
+				curr = curr.left;
+			}
+			return curr;
 		} else if (subTreeRoot.left != null) {
-			return findRightMostNode(subTreeRoot.left);
-		} else {
-			return subTreeRoot;
+			System.out.println("the left subtree is not null but the right probably is");
+			BTNode<T> curr = subTreeRoot.left;
+			
+			while (curr.right != null) {
+				System.out.println("curr:" + curr.toString());
+				curr = curr.right;
+			}
+			return curr;
 		}
+		return null;
+		
+//		if (subTreeRoot.right != null) {
+//			return findLeftMostNode(subTreeRoot.right);
+//		} else if (subTreeRoot.left != null) {
+//			return findRightMostNode(subTreeRoot.left);
+//		} else {
+//			return subTreeRoot;
+//		}
+	}
+	
+	public String getMin() {
+		return findMin(root).toString();
+	}
+	
+	public String getRoot() {
+		return root.toString();
 	}
 
 	private BTNode<T> findLeftMostNode(BTNode<T> node) {
@@ -259,6 +321,10 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 //			return ":::data:" + this.data + ":::  ";
 //			return this.left + "<-" + this.data.toString() + "->" + this.right + " ||| ";
 			return this.data.toString();
+		}
+		
+		public void nullify() {
+//			this = null;
 		}
 
 	}
