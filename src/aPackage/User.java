@@ -4,14 +4,14 @@ public class User {
 
 	public static void main(String[] args) {
 
-		BST<String> tree = new BST<String>();
+		BinarySearchTree<String> tree = new BinarySearchTree<String>();
 		tree.insert("A");
 		tree.insert("B");
 		tree.insert("C");
 		tree.insert("D");
 		tree.insert("E");
 
-		BST<String> tree2 = new BST<String>();
+		BinarySearchTree<String> tree2 = new BinarySearchTree<String>();
 		tree2.insert("P");
 		tree2.insert("I");
 		tree2.insert("R");
@@ -20,27 +20,38 @@ public class User {
 		tree2.insert("E");
 		tree2.insert("Y");
 
-//		System.out.println(tree.getRoot());
-		System.out.println(tree2.printInOrder());
-		System.out.println(tree2.printPreOrder());
-		System.out.println(tree2.printPostOrder());
-//		System.out.println(tree.getMin());
+		tree.printTreeInOrder();
+		System.out.println();
+		tree.printTreePreOrder();
+		System.out.println();
+		tree.printTreePostOrder();
+		System.out.println();
+		tree.delete("C");
+		System.out.println();
+		tree.printTreeInOrder();
+		System.out.println();
+		tree.printTreePreOrder();
+		System.out.println();
+		tree.printTreePostOrder();
+		
 		System.out.println();
 		System.out.println();
+		
+		tree2.printTreeInOrder();
+		System.out.println();
+		tree2.printTreePreOrder();
+		System.out.println();
+		tree2.printTreePostOrder();
 		System.out.println();
 		tree2.delete("P");
-
-//		System.out.println(tree.getRoot());
-		System.out.println(tree2.printInOrder());
-		System.out.println(tree2.printPreOrder());
-		System.out.println(tree2.printPostOrder());
-//		System.out.println(tree.getMin());
-
-//		System.out.println(tree2.getRoot());
-//		System.out.println(tree2.printInOrder());
-//		System.out.println(tree2.printPreOrder());
-//		System.out.println(tree2.printPostOrder());
-//		System.out.println(tree2.getMin());
+		System.out.println();
+		tree2.printTreeInOrder();
+		System.out.println();
+		tree2.printTreePreOrder();
+		System.out.println();
+		tree2.printTreePostOrder();
+		
+		
 //		Trie trie = new Trie();
 //		trie.insert("cat");
 //		trie.insert("cats");

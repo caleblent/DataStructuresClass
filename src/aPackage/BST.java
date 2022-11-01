@@ -23,6 +23,8 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 
 	/** the root of the tree */
 	private BTNode<T> root;
+	private int size;
+
 
 	/** construct empty tree */
 	public BST() {
@@ -89,7 +91,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 			root = node;
 			return root;
 		}
-		
+
 		int temp = root.data.compareTo(node.data);
 
 		if (temp < 0) {
@@ -102,11 +104,11 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 
 		else if (temp == 0)
 			throw new IllegalArgumentException("Cannot insert duplicate data.");
-		
+
 		return null;
-		
+
 	}
-	
+
 	/**
 	 * Iteratively add new node to BST
 	 * 
@@ -121,7 +123,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 
 		BTNode<T> curr = root;
 		int index = 0;
-		
+
 		while (index < 50) {
 			int temp = curr.data.compareTo(data);
 
@@ -129,8 +131,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 				if (curr.right == null) {
 					curr.right = new BTNode<T>(data, null, null);
 					return;
-				}
-				else 
+				} else
 					curr = curr.right;
 			}
 
@@ -138,16 +139,129 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 				if (curr.left == null) {
 					curr.left = new BTNode<T>(data, null, null);
 					return;
-				}
-				else 
+				} else
 					curr = curr.left;
 			}
 
 			else if (temp == 0)
 				throw new IllegalArgumentException("Cannot insert duplicate data.");
-			
+
 			index++;
 		}
+	}
+
+	public BTNode<T> deleteNode(BTNode<T> nodeToDelete) throws IllegalArgumentException {
+		if (nodeToDelete != null) {
+			BTNode<T> nodeToReturn = null;
+			if (nodeToDelete != null) {
+				if (nodeToDelete.left == null) {
+					nodeToReturn = transplant(nodeToDelete, nodeToDelete.right);
+				} else if (nodeToDelete.right == null) {
+					nodeToReturn = transplant(nodeToDelete, nodeToDelete.left);
+				} else {
+					BTNode<T> successorNode = getMinimum(nodeToDelete.right);
+					if (successorNode.parent != nodeToDelete) {
+						transplant(successorNode, successorNode.right);
+						successorNode.right = nodeToDelete.right;
+						successorNode.right.parent = successorNode;
+					}
+					transplant(nodeToDelete, successorNode);
+					successorNode.left = nodeToDelete.left;
+					successorNode.left.parent = successorNode;
+					nodeToReturn = successorNode;
+				}
+				size--;
+			}
+
+			return nodeToReturn;
+		}
+		return null;
+	}
+
+	/**
+     * Put one node from tree (newNode) to the place of another (nodeToReplace).
+     * 
+     * @param nodeToReplace
+     *            Node which is replaced by newNode and removed from tree.
+     * @param newNode
+     *            New node.
+     * 
+     * @return New replaced node.
+     */
+	private BTNode<T> transplant(BTNode<T> nodeToReplace, BTNode<T> newNode) {
+		if (nodeToReplace.parent == null) {
+            this.root = newNode;
+        } else if (nodeToReplace == nodeToReplace.parent.left) {
+            nodeToReplace.parent.left = newNode;
+        } else {
+            nodeToReplace.parent.right = newNode;
+        }
+        if (newNode != null) {
+            newNode.parent = nodeToReplace.parent;
+        }
+        return newNode;
+	}
+
+	/**
+	 * Recursively delete data from tree
+	 * 
+	 * @param take a node and target data to delete
+	 * @throws IllegalArgumentException if data null or was not found
+	 */
+	public BTNode<T> deleteRecDoesntWork(BTNode<T> node, T target) throws IllegalArgumentException {
+		if (node == null)
+			return null;
+
+		if (target == null)
+			throw new IllegalArgumentException("Data in deleteRec() cannot be null.");
+
+		if (node.data.compareTo(target) > 0) {
+
+			node.left = deleteRecDoesntWork(node.left, target);
+
+		} else if (node.data.compareTo(target) < 0) {
+
+			node.right = deleteRecDoesntWork(node.right, target);
+
+		} else if (node.left == null || node.right == null) {
+
+			System.out.println(" Deleting : " + target);
+			BTNode<T> temp = null;
+			temp = node.left == null ? node.right : node.left;
+
+			if (temp == null)
+				return null;
+			else
+				return node;
+
+		} else {
+			BTNode<T> successor = getSuccessor(node);
+			node.data = successor.data;
+			node.right = deleteRecDoesntWork(node.right, successor.data);
+			return node;
+		}
+
+		return node;
+	}
+
+	/**
+     * Removes element if node with such value exists.
+     * 
+     * @param element
+     *            Element value to remove.
+     * 
+     * @return New node that is in place of deleted node. Or null if element for
+     *         delete was not found.
+     */
+	public BTNode<T> delete(T target) throws IllegalArgumentException {
+		
+		BTNode<T> deleteNode = search(target);
+	        if (deleteNode != null) {
+	            return deleteNode(deleteNode);
+	        } else {
+	            return null;
+	        }
+	    
 	}
 
 	/**
@@ -156,13 +270,13 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 	 * @param target data to delete
 	 * @throws IllegalArgumentException if data null or was not found
 	 */
-	public void delete(T target) throws IllegalArgumentException {
+	public void deleteDoesntWork(T target) throws IllegalArgumentException {
 		if (target == null) {
 			throw new IllegalArgumentException("Data to delete cannot be null.");
 		}
 
 		BTNode<T> curr = root;
-		
+
 		while (curr != null) {
 			int temp = curr.data.compareTo(target);
 //			System.out.println(curr.data + " - " + target + " = " + temp);
@@ -170,7 +284,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 			if (temp < 0) {
 				if (curr.right != null)
 					curr = curr.right;
-				else 
+				else
 					throw new IllegalArgumentException("Data was not found.");
 			}
 
@@ -188,7 +302,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 					curr = null;
 					return;
 				}
-				
+
 				// 2. curr has a left node
 				else if (curr.right == null) {
 					curr.right = curr.left.right;
@@ -197,7 +311,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 					System.out.println(curr.left + " " + curr.data + " " + curr.right);
 					return;
 				}
-				
+
 				// 3. curr has a right node
 				else if (curr.left == null) {
 					curr.left = curr.right.left;
@@ -206,18 +320,18 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 					System.out.println(curr.left + " " + curr.data + " " + curr.right);
 					return;
 				}
-				
+
 				// 4. curr has both a left and right child node
 				else {
-					curr.data = findMin(curr).data;
-					BTNode<T> min = findMin(curr);
-					min = null; // WHY THE #$%@ DOES THIS NOT WORK????
-					OBJ_DESTROY(min);
-					return;
-//					BTNode<T> min = findMin(curr);
-//					curr.data = min.data;
-//					min = null; // WHY THE #$%@ DOES THIS NOT WORK????
+//					BTNode<T> successor = getSuccessor(curr);
+//					curr.data = successor.data;
+//					successor.data = null;
+//					deleteRec(successor, null); // WHY THE #$%@ DOES THIS NOT WORK????
 //					return;
+					BTNode<T> min = getSuccessor(curr);
+					curr.data = min.data;
+					min = null; // WHY THE #$%@ DOES THIS NOT WORK????
+					return;
 				}
 			}
 		}
@@ -230,69 +344,61 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 	 *                    at this node
 	 * @return a reference to the node holding the smallest value in this subtree
 	 */
-	private BTNode<T> findMin(BTNode<T> subTreeRoot) {
+	private BTNode<T> getSuccessor(BTNode<T> subTreeRoot) {
+		// if there is a right branch, than it is the leftmost value of that subtree
 		if (subTreeRoot.right != null) {
-			BTNode<T> curr = subTreeRoot.right;
-			
-			while (curr.left != null) {;
-				curr = curr.left;
-			}
-			return curr;
-		} else if (subTreeRoot.left != null) {
-			System.out.println("the left subtree is not null but the right probably is");
-			BTNode<T> curr = subTreeRoot.left;
-			
-			while (curr.right != null) {
-				System.out.println("curr:" + curr.toString());
-				curr = curr.right;
-			}
-			return curr;
+			return getMinimum(subTreeRoot.right);
 		}
-		return null;
-		
-//		if (subTreeRoot.right != null) {
-//			return findLeftMostNode(subTreeRoot.right);
-//		} else if (subTreeRoot.left != null) {
-//			return findRightMostNode(subTreeRoot.left);
-//		} else {
-//			return subTreeRoot;
-//		}
+
+		// otherwise it is a lowest ancestor whose left child is also ancestor of node
+		else {
+			BTNode<T> currentNode = subTreeRoot;
+			BTNode<T> parentNode = subTreeRoot.parent;
+			while (parentNode != null && currentNode == parentNode.right) {
+				// go up until we find parent that currentNode is not in right subtree
+				currentNode = parentNode;
+				parentNode = parentNode.parent;
+			}
+			return parentNode;
+		}
 	}
-	
-	public String getMin() {
-		return findMin(root).toString();
-	}
-	
+
 	public String getRoot() {
 		return root.toString();
 	}
+	
+	/**
+     * Finds a node with concrete value. If it is not found then null is
+     * returned.
+     * 
+     * @param element
+     *            Element value.
+     * @return Node with value provided, or null if not found.
+     */
+    public BTNode<T> search(T element) {
+    	BTNode<T> node = root;
+        while (node != null && node.data != null && !node.data.equals(element)) {
+            if (element.compareTo(node.data) < 0) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return node;
+    }
 
-	private BTNode<T> findLeftMostNode(BTNode<T> node) {
-		// if there is no left subtree of the node, than it is the leftmost node
-		if (node.left == null)
-			return node;
-
-		// cycle through the left child nodes until a null is reached,
-		// in which case the leftmost node has been found
-		BTNode<T> curr = node;
-		while (curr.left != null) {
-			curr = curr.left;
+	private BTNode<T> getMinimum(BTNode<T> node) {
+		while (node.left != null) {
+			node = node.left;
 		}
-		return curr;
+		return node;
 	}
 
-	private BTNode<T> findRightMostNode(BTNode<T> node) {
-		// if there is no right subtree of the node, than it is the rightmost node
-		if (node.right == null)
-			return node;
-
-		// cycle through the right child nodes until a null is reached,
-		// in which case the rightmost node has been found
-		BTNode<T> curr = node;
-		while (curr.right != null) {
-			curr = curr.right;
+	private BTNode<T> getMaximum(BTNode<T> node) {
+		while (node.right != null) {
+			node = node.right;
 		}
-		return curr;
+		return node;
 	}
 
 	/**
@@ -303,6 +409,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 	 * @param <T>
 	 */
 	private class BTNode<T> {
+		public BTNode<T> parent;
 		/** The actual stored data item */
 		public T data;
 		/** Reference to left child */
@@ -311,18 +418,26 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 		public BTNode<T> right;
 
 		public BTNode(T data, BTNode<T> left, BTNode<T> right) {
+			this.parent = null;
 			this.data = data;
 			this.left = left;
 			this.right = right;
 		}
 		
+		public BTNode(BTNode<T> parent, T data, BTNode<T> left, BTNode<T> right) {
+			this.parent = parent;
+			this.data = data;
+			this.left = left;
+			this.right = right;
+		}
+
 		@Override
 		public String toString() {
 //			return ":::data:" + this.data + ":::  ";
 //			return this.left + "<-" + this.data.toString() + "->" + this.right + " ||| ";
 			return this.data.toString();
 		}
-		
+
 		public void nullify() {
 //			this = null;
 		}
@@ -385,7 +500,7 @@ public class BST<T extends Comparable<T>> { // TODO: we need T to be Comparable
 		}
 		return root.data + " " + printPreOrder(root.left) + printPreOrder(root.right);
 	}
-	
+
 	public String printRoot() {
 		return this.root.toString();
 	}
