@@ -123,6 +123,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * @throws IllegalArgumentException if data is a duplicate
      */
     public BTNode<T> insert(T data) throws IllegalArgumentException {
+    	if (data == null)
+    		throw new IllegalArgumentException("Data to insert cannot be null.");
+    	
         if (root == null) {
             root = new BTNode<T>(data, null, null, null);
             size++;

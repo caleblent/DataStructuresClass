@@ -3,7 +3,22 @@ package aPackage;
 public class User {
 
 	public static void main(String[] args) {
-
+		
+		Graph graph1 = new Graph(10);
+//		graph1.printGraph();
+		graph1.addEdge(0, 1);
+		graph1.addEdge(2, 3);
+		graph1.addEdge(3, 4);
+		graph1.addEdge(7, 6);
+		graph1.addEdge(8, 9);
+		graph1.addEdge(3, 5);
+		graph1.addEdge(1, 9);
+		graph1.addEdge(4, 0);
+		graph1.addEdge(5, 0);
+		graph1.addEdge(9, 2);
+		graph1.printGraph();
+		
+		
 	}
 	
 	public static void testBinarySearchTrees() {
